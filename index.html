@@ -45,12 +45,16 @@ document.addEventListener('DOMContentLoaded', function() {
    const queryString = window.location.search;
    const urlParams = new URLSearchParams(queryString);
    var dValue = urlParams.get('d');
-   console.log('Value of "d" parameter:', dValue);
+   var eValue = urlParams.get('e');
+   //console.log('Value of "d" parameter:', dValue);
 
    dValue = decodeURIComponent(dValue);
+   eValue = decodeURIComponent(eValue);
 
-   const inputElement = document.forms['forma2'].querySelector('input[name="s"]');
-   if (dValue) inputElement.value = dValue;
+   const inputElement1 = document.forms['forma1'].querySelector('input[name="s"]');
+   const inputElement2 = document.forms['forma2'].querySelector('input[name="s"]');
+   if (eValue) inputElement1.value = eValue;
+   if (dValue) inputElement2.value = dValue;
 });
 
 
