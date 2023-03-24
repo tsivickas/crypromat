@@ -30,6 +30,7 @@ document.addEventListener('submit', function(e) {
     forma.appendChild(div);
     //forma.reset();
     document.forms['forma2'].querySelector('input[name="s"]').value=encryptedOrig;
+    document.forms['forma2'].querySelector('input[name="p"]').value=pVal;
   }
   if (e.target.id === 'forma2') {
     e.preventDefault();
