@@ -11,17 +11,6 @@
   
 <script>
 
- var encrypted = CryptoJS.AES.encrypt('string','pass' );
-encrypted = encrypted.toString();
-
-//encodeURIComponent(query);
-
-console.log(encrypted);
-
- var decrypted = CryptoJS.AES.decrypt(encrypted , 'pass').toString(CryptoJS.enc.Utf8);
-
-console.log(decrypted );
-
 document.addEventListener('submit', function(e) {
   if (e.target.id === 'forma1') {
     e.preventDefault();
@@ -35,7 +24,28 @@ document.addEventListener('submit', function(e) {
     link.href = str;
     link.target = '_blank';
     link.textContent = str;
-    forma.appendChild(link);
+    var div = document.createElement('div');
+    div.appendChild(link);
+    forma.appendChild(div);
+    forma.reset();
+  }
+  if (e.target.id === 'forma2') {
+    e.preventDefault();
+    var forma = e.target;
+    var sVal = forma.querySelector('input[name=s]').value;
+    var pVal = forma.querySelector('input[name=p]').value;
+    var decrypted = CryptoJS.AES.decrypt(sVal , pVal).toString(CryptoJS.enc.Utf8);
+
+    // Create a new div element
+    var div = document.createElement("div");
+
+    // Create a text node with the desired text
+    var text = document.createTextNode(decrypted);
+
+    // Append the text node to the div element
+    div.appendChild(text);
+
+    forma.appendChild(div);
     forma.reset();
   }
 });
