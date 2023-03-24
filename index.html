@@ -41,16 +41,20 @@ document.addEventListener('submit', function(e) {
 });
 
 
+document.addEventListener('DOMContentLoaded', function() {
+   const queryString = window.location.search;
+   const urlParams = new URLSearchParams(queryString);
+   var dValue = urlParams.get('d');
+   console.log('Value of "d" parameter:', dValue);
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-var dValue = urlParams.get('d');
-console.log('Value of "d" parameter:', dValue);
+   dValue = decodeURIComponent(dValue);
 
- dValue = decodeURIComponent(dValue);
+   const inputElement = document.forms['forma2'].querySelector('input[name="s"]');
+   inputElement.value = dValue;
+});
 
-const inputElement = document.forms['forma2'].querySelector('input[name="s"]');
-inputElement.value = dValue;
+
+
 
 
 
@@ -63,14 +67,14 @@ inputElement.value = dValue;
 <div class="pure-u-1-3">
 
   
-<form id="forma1">
+<form id="forma1" class="pure-form" >
 <input type="text" name="s" placeholder="string" />
 <input type="text" name="p" placeholder="pass" />
 <button type="submit" class="pure-button pure-button-primary">Encode</button>
 <br />
 </form>
 
-<form id="forma2">
+<form id="forma2" class="pure-form" >
 <input type="text" name="s" placeholder="string" />
 <input type="text" name="p" placeholder="pass" />
 <button type="submit" class="pure-button pure-button-primary">Decode</button>
