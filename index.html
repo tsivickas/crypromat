@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="https://yui-s.yahooapis.com/pure/0.6.0/pure-min.css">
@@ -22,25 +22,29 @@ console.log(encrypted);
 
 console.log(decrypted );
 
-$(document).on('submit','#forma1',function(e){
- var forma = $(this);
- e.preventDefault();
- var encrypted = CryptoJS.AES.encrypt( forma.find('input[name=s]').val() , forma.find('input[name=p]').val() );
- encrypted = encodeURIComponent(encrypted.toString());
-var str = 'https://tsivickas.github.io/crypromat/?d='+encrypted;
-forma.append('<a href="'+str+'" target="_blank">'+str+'</a><br />');
-forma[0].reset();
-
+document.addEventListener('submit', function(e) {
+  if (e.target.id === 'forma1') {
+    e.preventDefault();
+    var forma = e.target;
+    var sVal = forma.querySelector('input[name=s]').value;
+    var pVal = forma.querySelector('input[name=p]').value;
+    var encrypted = CryptoJS.AES.encrypt(sVal, pVal).toString();
+    encrypted = encodeURIComponent(encrypted);
+    var str = 'https://tsivickas.github.io/crypromat/?d=' + encrypted;
+    var link = document.createElement('a');
+    link.href = str;
+    link.target = '_blank';
+    link.textContent = str;
+    forma.appendChild(link);
+    forma.reset();
+  }
 });
-
-
-
 
 
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-const dValue = urlParams.get('d');
+var dValue = urlParams.get('d');
 console.log('Value of "d" parameter:', dValue);
 
  dValue = decodeURIComponent(dValue);
@@ -62,14 +66,14 @@ inputElement.value = dValue;
 <form id="forma1">
 <input type="text" name="s" placeholder="string" />
 <input type="text" name="p" placeholder="pass" />
-<button type="submit">Encode</button>
+<button type="submit" class="pure-button pure-button-primary">Encode</button>
 <br />
 </form>
 
 <form id="forma2">
 <input type="text" name="s" placeholder="string" />
 <input type="text" name="p" placeholder="pass" />
-<button type="submit">Decode</button>
+<button type="submit" class="pure-button pure-button-primary">Decode</button>
 <br />
 </form>
   
